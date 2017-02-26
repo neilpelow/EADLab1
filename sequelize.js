@@ -167,7 +167,7 @@ Participant.hasMany(Case, { foreignKey: 'responsendent_id', primaryKey: true});
 Courtroom.hasMany(Case, {foreignKey: 'courtroom_id', primaryKey: true});
 
 //------------------------------------ CREATE STATEMENTS ------------------------------------//
-app.post('/case/create', function(req, res) {
+app.get('/case/create', function(req, res) {
  Case.create({
     id: req.body.id,
     judge_id: req.body.judge_id,
@@ -182,7 +182,7 @@ app.post('/case/create', function(req, res) {
   });
 });
 
-app.post('/courtroom/create', function(req, res) {
+app.get('/courtroom/create', function(req, res) {
  Courtroom.create({
     id: req.body.id,
     number: req.body.number
@@ -191,7 +191,7 @@ app.post('/courtroom/create', function(req, res) {
   });
 });
 
-app.post('/judge/create', function(req, res) {
+app.get('/judge/create', function(req, res) {
   Judge.create({
     id: req.body.id,
     name: req.body.name,
@@ -202,7 +202,7 @@ app.post('/judge/create', function(req, res) {
   });
 });
 
-app.post('/participant/create', function(req, res) {
+app.get('/participant/create/:id/name/:name/address/:address/type/:type', function(req, res) {
  Participant.create({
     id: req.body.id,
     name: req.body.name,
@@ -239,52 +239,52 @@ app.get('/case/:id', function(req, res) {
 });
 
 //------------------------------------ UPDATE STATEMENTS ------------------------------------//
-app.post('/judge/update', function(req, res) {
+app.get('/judge/update/:id/name/:name/room/:room/ext/:ext', function(req, res) {
   Judge.update({
-    name: req.body.name,
-    room: req.body.room,
-    ext: req.body.string
+    name: req.params.name,
+    room: req.params.room,
+    ext: req.params.string
   }, {
       where: {
-          id: req.body.id
+          id: req.params.id
       }
   }).then(function(user) {
     res.json(user);
   });
 });
 
-app.post('/courtroom/update', function(req, res) {
+app.get('/courtroom/update/:id/number/:number', function(req, res) {
  Courtroom.update({
-    number: req.body.number
+    number: req.params.number
   }, {
       where: {
-          id: req.body.id
+          id: req.params.id
       } 
   }).then(function(courtroom) {
     res.json(courtroom);
   });
 });
 
-app.post('/participant/update', function(req, res) {
+app.get('/participant/update/:id/name/:name/address/:address/type/:type', function(req, res) {
  Participant.update({
-    name: req.body.name,
-    address: req.body.address,
-    type: req.body.type
+    name: req.params.name,
+    address: req.params.address,
+    type: req.params.type
   }, {
       where: {
-          id: req.body.id
+          id: req.params.id
       } 
   }).then(function(participant) {
     res.json(participant);
   });
 });
 
-app.post('/case/update', function(req, res) {
+app.get('/case/update/:id/judge_id/:judge_id/courtroom_id/:courtroom_id/respondent_id/:respondent_id/claimant_id/:claimant_id/start_date/:start_date/duration/:duration/result/:result', function(req, res) {
  Case.update({
-    number: req.body.number
+    number: req.params.number
   }, {
       where: {
-          id: req.body.id
+          id: req.params.id
       } 
   }).then(function(result) {
     res.json(result);
@@ -292,40 +292,40 @@ app.post('/case/update', function(req, res) {
 });
 
 //------------------------------------ DELETE STATEMENTS ------------------------------------//
-app.post('/judge/delete', function(req, res) {
+app.get('/judge/delete/:id', function(req, res) {
   Judge.destroy({
    where: {
-       id: req.body.id
+       id: req.params.id
    }
   }).then(function(judge) {
     res.json(judge);
   });
 });
 
-app.post('/courtroom/delete', function(req, res) {
+app.get('/courtroom/delete/:id', function(req, res) {
  Courtroom.destroy({
     where: {
-        id: req.body.id
+        id: req.params.id
     }
   }).then(function(courtroom) {
     res.json(courtroom);
   });
 });
 
-app.post('/participant/delete', function(req, res) {
+app.get('/participant/delete/:id', function(req, res) {
  Participant.destroy({
     where: {
-        id: req.body.id
+        id: req.params.id
     }
   }).then(function(participant) {
     res.json(participant);
   });
 });
 
-app.post('/case/delete', function(req, res) {
+app.get('/case/delete/:id', function(req, res) {
  Case.destroy({
     where: {
-        id: req.body.id
+        id: req.params.id
     }
   }).then(function(result) {
     res.json(result);
