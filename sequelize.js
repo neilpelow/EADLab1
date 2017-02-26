@@ -161,6 +161,11 @@ Case.sync({force: true}).then(function () {
     });
 });
 
+Judge.hasMany(Case, { foreignKey: 'judge_id', primaryKey: true});
+Participant.hasMany(Case, { foreignKey: 'claimant_id', primaryKey: true });
+Participant.hasMany(Case, { foreignKey: 'responsendent_id', primaryKey: true});
+Courtroom.hasMany(Case, {foreignKey: 'courtroom_id', primaryKey: true});
+
 //------------------------------------ CREATE STATEMENTS ------------------------------------//
 app.post('/case/create', function(req, res) {
  Case.create({
