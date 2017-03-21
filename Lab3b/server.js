@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 
 var port = process.env.PORT || 8080;
 app.set('superSecret', config.secret); // secret variable
-var sequelize = new Sequelize('lab3', 'kennanseno', '', {
+var sequelize = new Sequelize('lab3', 'neilpelow', '', {
     host: 'localhost',
     dialect: 'postgres',
     pool: {
@@ -196,19 +196,3 @@ apiRoutes.get('/removeUser', function(req, res) {
 });
 
 app.use('/api', apiRoutes);
-
-
-
-// var http, crypto, sharedSecret, query, signature;
-
-// http = require("http");
-// crypto = require("crypto");
-
-// sharedSecret = "super-secret";
-// query = "/api/v1";
-// signature = crypto.createHmac("sha256", sharedSecret).update(query).digest("hex");
-
-// console.log(signature);
-
-// signature = crypto.createHmac("sha256", sharedSecret).update(reg.base_uri).digest("hex");
-// and after you checked the token, just check the hmac and if the same, then do the next()l

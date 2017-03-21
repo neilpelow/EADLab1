@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 var port = process.env.PORT || 8080;
-app.set('superSecret', config.secret); // secret variable
-var sequelize = new Sequelize('lab3', 'kennanseno', '', {
+app.set('superSecret', config.secret);
+var sequelize = new Sequelize('lab3', 'neilpelow', '', {
     host: 'localhost',
     dialect: 'postgres',
     pool: {
